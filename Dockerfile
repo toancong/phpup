@@ -12,7 +12,9 @@ ENV GIT_KEY=keyOpenSSH-mygit
 # The RUN instruction will execute any commands in a new layer on top of the current image and commit the results.
 # The resulting committed image will be used for the next step in the Dockerfile.
 # This is not a docker best practice but there are no choice when this become a our template Dockerfile
-RUN mkdir -p /root/.ssh && ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts
+RUN mkdir -p /root/.ssh \
+    && ssh-keyscan bitbucket.org >> /root/.ssh/known_hosts \
+    && ssh-keyscan github.com >> /root/.ssh/known_hosts
 
 # https://getcomposer.org/doc/articles/troubleshooting.md#xdebug-impact-on-composer
 RUN sed -i -e "s/^zend_extension\s*=\s*xdebug.so.*/;zend_extension=xdebug.so/" /etc/php/conf.d/xdebug.ini \
