@@ -25,7 +25,7 @@
 
   # this key for access repository
   COPY keyOpenSSH-mygit ../keyOpenSSH-mygit
-  COPY run.sh ../run.sh
+  CMD your command
 
   ```
 
@@ -37,7 +37,6 @@
   project
       api
           Dockerfile
-          run.sh
           keyOpenSSH-mygit
   ```
 
@@ -65,4 +64,11 @@
         GIT_KEY: keyOpenSSH-mygit
         GIT_REPO: git@bitbucket.org:monokera/project-api.git
         GIT_BRANCH: develop
+      command: |
+        bash -c 'bash -s <<EOF
+
+        /usr/app/laravel/build.sh
+        /init
+
+        EOF'
   ```
