@@ -5,6 +5,7 @@ FROM egyptianbman/docker-centos-nginx-php:7.0
 RUN yum-config-manager --enable remi-php71
 RUN yum update -y
 RUN yum install -y composer && composer global require "hirak/prestissimo:^0.3"
+RUN yum -y install php-xdebug
 COPY vhost.conf /etc/nginx/conf.d/vhost.conf
 
 WORKDIR /app
