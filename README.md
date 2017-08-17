@@ -1,74 +1,32 @@
 # Usage #
 
-1. Use in your Dockerfile:
-
-  ``` bash
-  FROM toancong/phpup
-
-  ENV GIT_KEY=keyOpenSSH-mygit \
-      GIT_REPO=git@bitbucket.org:monokera/project-api.git \
-      GIT_BRANCH=develop
-
-  # this key for access repository
-  COPY keyOpenSSH-mygit ../keyOpenSSH-mygit
-
-  ```
-
-2. Want to change default run? Just replace default with yours:
-
-  ``` bash
-  FROM toancong/phpup
-
-  ENV GIT_KEY=keyOpenSSH-mygit \
-      GIT_REPO=git@bitbucket.org:monokera/project-api.git \
-      GIT_BRANCH=develop
-
-  # this key for access repository
-  COPY keyOpenSSH-mygit ../keyOpenSSH-mygit
-  CMD your command
-
-  ```
-
-3. Recommendation use docker-compose like below:
+Recommendation use docker-compose like below:
 
   Directory Structure
-
-  ``` bash
-  project
-      api
-          Dockerfile
-          keyOpenSSH-mygit
-  ```
 
   docker-compose.yml
 
   ``` bash
-  version: '2'
+  version: "2"
   services:
-
-    database:
-      image: mysql
+    api_common:
+      image: toancong/phpup:1.3
+      volumes:
+        - .:/var/www/app
       environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: mydb
-        MYSQL_USER: dbuser
-        MYSQL_PASSWORD: 123
-
+        - WEBROOT=/var/www/app/public
+      working_dir: /var/www/app
     api:
-      build: ./api
-      environment:
-        DB_HOST: database
-        DB_DATABASE: mydb
-        DB_USERNAME: dbuser
-        DB_PASSWORD: 123
-        GIT_KEY: keyOpenSSH-mygit
-        GIT_REPO: git@bitbucket.org:monokera/project-api.git
-        GIT_BRANCH: develop
-      command: |
-        bash -c 'bash -s <<EOF
-
-        /usr/app/laravel/build.sh
-        /init
-
-        EOF'
+      extends:
+        service: api_common
+      depends_on:
+        - db
+      ports:
+        - 12000:80
+    test:
+      extends:
+        service: api_common
+      depends_on:
+        - dbtest
+    # ... more services
   ```
