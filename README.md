@@ -10,7 +10,7 @@ Recommendation use docker-compose like below:
   version: "2"
   services:
     api_common:
-      image: toancong/phpup:1.3
+      image: toancong/phpup:2
       volumes:
         - .:/var/www/app
       environment:
