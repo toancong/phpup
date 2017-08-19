@@ -1,6 +1,6 @@
 # The FROM instruction sets the Base Image for subsequent instructions.
 # As such, a valid Dockerfile must have FROM as its first instruction.
-FROM richarvey/nginx-php-fpm:1.2.4
+FROM richarvey/nginx-php-fpm:1.3.0
 
 # The MAINTAINER instruction allows you to set the Author field of the generated images.
 MAINTAINER Pham Cong Toan <toan.pham@monokera.com>
@@ -13,13 +13,7 @@ ENV WEBROOT /var/www/app/public
 # The resulting committed image will be used for the next step in the Dockerfile.
 # This is not a docker best practice but there are no choice when this become a our template Dockerfile
 
-RUN apk update \
-    && apk add --no-cache \
-    g++ make autoconf \
-    && docker-php-source extract \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug \
-    && rm -rf /tmp/*
+RUN docker-php-ext-enable xdebug
 
 RUN composer global require hirak/prestissimo
 
