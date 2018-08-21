@@ -1,6 +1,6 @@
 # The FROM instruction sets the Base Image for subsequent instructions.
 # As such, a valid Dockerfile must have FROM as its first instruction.
-FROM richarvey/nginx-php-fpm:1.5.0
+FROM richarvey/nginx-php-fpm:php5
 
 # The MAINTAINER instruction allows you to set the Author field of the generated images.
 MAINTAINER Pham Cong Toan <toan.pham@monokera.com>
@@ -23,7 +23,6 @@ WORKDIR /var/www/app
 # and adds them to the filesystem of the container at the path <dest>.
 # TL;DR https://www.ctl.io/developers/blog/post/dockerfile-add-vs-copy/
 # Use COPY
-COPY conf/nginx-site.conf /etc/nginx/sites-enabled/default.conf
 
 # The VOLUME instruction creates a mount point with the specified name and marks it
 # as holding externally mounted volumes from native host or other containers.
