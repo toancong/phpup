@@ -1,6 +1,6 @@
 # The FROM instruction sets the Base Image for subsequent instructions.
 # As such, a valid Dockerfile must have FROM as its first instruction.
-FROM richarvey/nginx-php-fpm:1.5.0
+FROM richarvey/nginx-php-fpm:1.5.7
 
 # The MAINTAINER instruction allows you to set the Author field of the generated images.
 MAINTAINER Pham Cong Toan <toan.pham@monokera.com>
@@ -34,3 +34,7 @@ COPY conf/nginx-site.conf /etc/nginx/sites-enabled/default.conf
 # The main purpose of a CMD is to provide defaults for an executing container.
 
 # The EXPOSE instructions informs Docker that the container will listen on the specified network ports at runtime.
+
+RUN docker-php-ext-configure pcntl \
+    && docker-php-ext-install pcntl \
+    && docker-php-ext-enable pcntl xdebug \
