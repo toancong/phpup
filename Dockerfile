@@ -36,5 +36,5 @@ COPY conf/nginx-site.conf /etc/nginx/sites-enabled/default.conf
 # The EXPOSE instructions informs Docker that the container will listen on the specified network ports at runtime.
 
 RUN docker-php-ext-configure pcntl \
-    && docker-php-ext-install pcntl \
-    && docker-php-ext-enable pcntl xdebug \
+    && docker-php-ext-install pcntl bcmath \
+    && docker-php-ext-enable pcntl xdebug bcmath
