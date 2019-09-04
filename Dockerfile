@@ -1,9 +1,9 @@
 # The FROM instruction sets the Base Image for subsequent instructions.
 # As such, a valid Dockerfile must have FROM as its first instruction.
-FROM richarvey/nginx-php-fpm:1.5.7
+FROM richarvey/nginx-php-fpm:1.7.4
 
 # The MAINTAINER instruction allows you to set the Author field of the generated images.
-MAINTAINER Pham Cong Toan <toan.pham@monokera.com>
+MAINTAINER Pham Cong Toan <toancong1920@gmail.com>
 
 # The ENV instruction sets the environment variable <key> to the value <value>.
 # This value will be in the environment of all “descendant” Dockerfile commands and can be replaced inline in many as well.

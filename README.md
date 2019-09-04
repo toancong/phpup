@@ -7,7 +7,7 @@ Recommendation use docker-compose like below:
   docker-compose.yml
 
   ``` bash
-  version: "2"
+  version: "3"
   services:
     api_common:
       image: toancong/phpup:2
