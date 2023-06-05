@@ -1,6 +1,6 @@
 # The FROM instruction sets the Base Image for subsequent instructions.
 # As such, a valid Dockerfile must have FROM as its first instruction.
-FROM richarvey/nginx-php-fpm:2.0.5
+FROM richarvey/nginx-php-fpm:3.1.5
 
 # The MAINTAINER instruction allows you to set the Author field of the generated images.
 LABEL maintainer="Pham Cong Toan <toancong1920@gmail.com>"
